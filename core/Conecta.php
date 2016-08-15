@@ -12,34 +12,17 @@ class Conecta {
         
     }
     public function RealizarConexion(){
-        $this->conexion=  mysqli_connect($this->host,$this->user,$this->password,$this->database_name);
+        $this->conexion=  mysqli_connect($this->host,$this->user,$this->password,$this->database_name)or die('no se pudo conectar');
+        
     }
     public function Proceso(){
         $this->RealizarConexion();
+        mysqli_select_db($this->conexion, $this->database_name)or die('no se encuentra bd');
         $this->result();
-        
-        
     }
     
     public function result(){
-        $this->resultado=  mysqli_query($this->conexion,$this->sql);
-    }
-
-    public function VerificarConexion(){
-        if(!$this->getConexion()){
-             die('No se conecto'.mysqli_error());
-        }  else {
-
-//            echo 'se conecto en la verificacion<br>';
-        }
-    }
-
-    public function rowCount(){
-        $con=0;
-        while($row=mysqli_fetch_array($this->getResultado())) {
-            $con=$con+1;
-        } 
-        return $con;
+        $this->resultado=  mysqli_query($this->conexion,$this->sql)or die('no hay resultados');
     }
 
     public function EjecutarSql(){
@@ -47,23 +30,6 @@ class Conecta {
 
     }
     
-//    public function Nfilas($sql){
-//        return mysqli_num_rows($sql);
-//    }
-//    public function NColumnas($sql){
-//        return mysqli_num_fields($sql);
-//    }
-//    public function NomCampo($sql,$i){
-//        return mysqli_field_name($sql);
-//    }
-   
-
-    public function ProcesarConexion(){
-        $this->Conectar();
-        $this->VerificarConexion();
-        $this->SeleccionarBD();
-        $this->EjecutarSql();
-    }
     public function CerrarConexion(){
         mysqli_close($this->getConexion());
     }

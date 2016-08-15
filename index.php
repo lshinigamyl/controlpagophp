@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
-include './Conecta.php';
-include './core/lang/variables.php';
+include './core/Conecta.php';
+
     function getRealIP()
 {
 
@@ -41,7 +41,7 @@ include './core/lang/variables.php';
             <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
             <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title><?php echo $nomP; ?></title>
+            <title><?php echo 'Hola a todos'; ?></title>
         
     </head>
     <body>
@@ -51,7 +51,7 @@ include './core/lang/variables.php';
         <div class="container" style="    padding-left: 15px; padding-right: 15px;">
             <table class="table table-responsive table-hover table-bordered">
             <tr>
-                <th class="text-center h2"> Nombre </th> <th class="text-center h2" > Inicio </th> <th class="text-center h2"> Fin </th> <th class="text-center h2"> Estado </th>
+                <th class="text-center h2"> Nombre </th> <th class="text-center h2" > Inicio </th> <th class="text-center h2"> Fin </th><th class="text-center h2"> Pago </th> <th class="text-center h2"> Estado </th>
             </tr>
             
             <?php
@@ -62,33 +62,15 @@ include './core/lang/variables.php';
                         $row=  mysqli_fetch_array($exec->getResultado());
 
                         while($row) {
-                            echo $row[2]."";
-                                echo '<tr>';
+                               echo '<tr>';
                                echo '<td class="text-center">'.$row[0].'</td><td class="text-center">'.$row[1].'</td><td class="text-center">'.$row[2].'</td><td class="text-center">'.$row[3].'</td><td class="text-center">'.$row[4].'</td>';
                                echo '</tr>';
-                   } 
-
-                   if($exec->rowCount()!=0){
-
-                   }
-                   else {
-                       header("location:Error.php");
-                   }
+                        } 
                    $exec->CerrarConexion();
-
                } catch (Exception $ex) {
-                   header("location:Error.php");
+                   echo 'entraste al cath';
                }
             ?>
-            
-            <?php
-                   while ($row = mysqli_fetch_array($conexion->getPeticion())) {
-                   echo '<tr>';
-                   echo '<td class="text-center">'.$row[0].'</td><td class="text-center">'.$row[1].'</td><td class="text-center">'.$row[2].'</td><td class="text-center"><a>Eliminar</a><br><a>Modificar</a></td>';
-                   echo '</tr>';
-           }
-           $conexion->CerrarConexion();        
-           ?>
         </table>
         </div>
         <div id="add"><button>Agregar Contacto</button></div>
