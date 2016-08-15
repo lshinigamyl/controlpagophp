@@ -57,16 +57,13 @@ include './core/Conecta.php';
             <?php
                 try {
                         $exec = new Conecta();
-                        $exec->setSql($sql);
                         $exec->Proceso();
-                        $row=  mysqli_fetch_array($exec->getResultado());
-
-                        while($row) {
+                        while($row= mysqli_fetch_array($exec->getResultado())) {
                                echo '<tr>';
                                echo '<td class="text-center">'.$row[0].'</td><td class="text-center">'.$row[1].'</td><td class="text-center">'.$row[2].'</td><td class="text-center">'.$row[3].'</td><td class="text-center">'.$row[4].'</td>';
                                echo '</tr>';
                         } 
-                   $exec->CerrarConexion();
+                        $exec->CerrarConexion();
                } catch (Exception $ex) {
                    echo 'entraste al cath';
                }
